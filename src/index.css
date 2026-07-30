@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&display=swap');
+
+*{
+  margin: 0px;
+  font-family: "Inter", sans-serif;
+}
+
+.navbar{
+  background-color: #141414;
+  display: flex;
+  align-items: center;
+  padding: 7px;
+}
+
+.logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo img{
+  height: 35px;
+  width: 35px;
+}
+
+.navbar ul{
+  display: flex;
+  gap: 40px;
+}
+
+.navbar ul li a{
+  text-decoration: none;
+  color: white;
+  display: inline-block;
+}
+
+.navbar ul li{
+  font-size: 13px;
+  list-style: none;
+}
+
+.navbar ul li a:hover{
+  cursor: pointer;
+  color: #d8b163;
+  transform: scale(1.1);
+  transition-duration: 0.3s;
+}
+.body{
+  background-color: #FCF9F8;
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.top{
+  background-color: #FCF9F8;
+  height: 30px;
+}
+
+.left{
+  width: 25%;
+  padding: 20px;
+}
+
+.left h1{
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.left p{
+  border: 2px solid black;
+  background-color: #F0EDEC;
+  box-shadow: 2px 4px 0px 0px;
+  padding: 10px;
+  margin-top: 20px;
+  max-width: 80%;
+}
+
+.middle{
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.middle-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.middle-content h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #1a1a1a;
+}
+
+.middle-content p {
+  color: #666;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.upload-btn {
+  background-color: #0b2d69;
+  color: white;
+  border: 2px solid black;
+  padding: 12px 24px;
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 2px 4px 0px 0px black;
+  transition: all 0.2s;
+}
+
+.upload-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 6px 0px 0px black;
+}
+
+.upload-btn svg {
+  font-size: 18px;
+}
+
+.right{
+  width: 25%;
+  padding: 20px;
+  list-style: none;
+}
+
+.right p{
+  font-weight: 300;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.list{
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.list li{
+  padding-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.list li img{
+  height: 20px;
+  width: 20px;
+}
+

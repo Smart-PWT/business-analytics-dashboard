@@ -46,6 +46,7 @@
   transform: scale(1.1);
   transition-duration: 0.3s;
 }
+
 .body{
   background-color: #FCF9F8;
   display: flex;
@@ -210,11 +211,21 @@ input[type="file"]::file-selector-button{
   font-family: "Space Grotesk", sans-serif;
 }
 
+.error-message-container{
+  border: 1.5px solid rgb(65, 64, 64);
+  background-color: #B9B7B6;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5vh;
+  padding-bottom: 40px;
+}
+
 .error-message{
   border: 2px solid #BB1C1C;
   background-color: #BB1C1C;
   box-shadow: 4px 4px;
-  max-width: 90%;
+  max-width: 95%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 5vh;
@@ -229,7 +240,7 @@ input[type="file"]::file-selector-button{
   border: 2px solid green;
   background-color: #2E7D32;
   box-shadow: 4px 4px;
-  max-width: 90%;
+  max-width: 95%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 5vh;
@@ -250,8 +261,13 @@ input[type="file"]::file-selector-button{
   padding: 15px 30px 15px 30px;
   margin-top: 5vh;
   background-color: #1a1a1a;
+  box-shadow: 4px 4px black;
   color: white;
   border: none;
+}
+
+.message button:hover{
+  cursor: pointer;
 }
 
 .message h3{
@@ -269,4 +285,9 @@ hr{
   margin-left: auto;
   margin-right: auto;
   border: 1px solid black;
+}
+
+.message{
+  font-family: "Space Grotesk", sans-serif;
+  color: white;
 }

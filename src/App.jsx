@@ -7,7 +7,6 @@ import Predictions from "./pages/Predictions.jsx";
 import Export from "./pages/Export.jsx";
 
 
-
 function App() {
   return (
     <BrowserRouter>

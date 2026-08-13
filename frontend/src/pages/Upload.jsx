@@ -31,9 +31,15 @@ function Upload() {
         }
     }
 
-    function handleViewDashboard() {
+    function navigateToDashboard() {
         navigate("/");
     }
+
+    function navigateToExport(){
+        navigate("/export");
+    }
+
+
 
     return (
         <>
@@ -77,16 +83,14 @@ function Upload() {
                                         ? ` (${result.rows_flagged} rows flagged/cleaned)`
                                         : ""}
                                 </p>
-                                <button onClick={handleViewDashboard}>VIEW CLEANED DATASET</button>
+                                <button onClick={navigateToDashboard}>VIEW ANALYTICS</button>
+                                <br />
+                                <button onClick={navigateToExport}>VIEW CLEANED DATASET</button>
                             </div>
                         </div>
                     </div>
                 )}
             </div>
-            <hr />
-            <h1 className="message">
-                THANKS FOR CHOOSING OUR SERVICES...
-            </h1>
         </>
     );
 }

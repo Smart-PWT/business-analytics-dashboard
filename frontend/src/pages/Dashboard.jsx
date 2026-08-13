@@ -3,11 +3,45 @@ import { useNavigate } from "react-router-dom";
 import { getDashboard } from "../api/client";
 import { useUpload } from "../context/UploadContext";
 import Loader from "../components/Loader.jsx";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Legend } from "recharts";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Legend, LabelList } from "recharts";
 
 import square from "../assets/square.png";
 import circle from "../assets/circle.png";
 import triangle from "../assets/triangle.png";
+
+const CustomBarLabel = (props) => {
+    const { x, y, width, height, value } = props;
+    if (!value) return null;
+    const parts = String(value).split("|||");
+    const itemName = parts[0];
+    const qty = parts[1] ? ` (${parts[1]})` : "";
+    
+    const maxChars = Math.max(0, Math.floor((height - 15) / 7));
+    
+    let displayStr = itemName + qty;
+    if (displayStr.length > maxChars) {
+        const allowedLen = maxChars - qty.length - 2;
+        if (allowedLen > 0) {
+            displayStr = itemName.substring(0, allowedLen) + ".." + qty;
+        } else {
+            displayStr = (itemName + qty).substring(0, maxChars);
+        }
+    }
+
+    return (
+        <text
+            x={x + width / 2}
+            y={y + height - 10}
+            fill="#fff"
+            fontSize={12}
+            fontWeight="bold"
+            textAnchor="start"
+            transform={`rotate(-90, ${x + width / 2}, ${y + height - 10})`}
+        >
+            {displayStr}
+        </text>
+    );
+};
 
 function Dashboard() {
     const navigate = useNavigate();
@@ -22,6 +56,12 @@ function Dashboard() {
             setLoading(true);
             getDashboard(uploadId)
                 .then(res => {
+                    if (res && res.top_products) {
+                        res.top_products = res.top_products.map(p => ({
+                            ...p,
+                            display_label: `${p.item_name}|||${p.quantity}`
+                        }));
+                    }
                     setData(res);
                     setLoading(false);
                 })
@@ -101,14 +141,20 @@ function Dashboard() {
                 <div className="chart-card">
                     <h3>Sales Trend</h3>
                     <div className="chart-wrapper">
-                        <ResponsiveContainer width="100%" height={300}>
-                            <LineChart data={data.sales_trend}>
+                        <ResponsiveContainer width="100%" height={350}>
+                            <LineChart data={data.sales_trend} margin={{ top: 10, right: 20, left: 10, bottom: 20 }}>
                                 <CartesianGrid strokeDasharray="3 3" stroke="#000" vertical={false} />
-                                <XAxis dataKey="date" stroke="#000" tick={{ fill: '#000', fontWeight: 'bold', fontSize: 12 }} axisLine={{ stroke: '#000', strokeWidth: 2 }} tickLine={{ stroke: '#000', strokeWidth: 2 }} />
+                                <XAxis
+                                    dataKey="date"
+                                    stroke="#000"
+                                    tick={false}
+                                    axisLine={{ stroke: '#000', strokeWidth: 2 }}
+                                    tickLine={false}
+                                />
                                 <YAxis stroke="#000" tick={{ fill: '#000', fontWeight: 'bold', fontSize: 12 }} axisLine={{ stroke: '#000', strokeWidth: 2 }} tickLine={{ stroke: '#000', strokeWidth: 2 }} />
                                 <Tooltip contentStyle={{ backgroundColor: '#fff', border: '2px solid black', color: '#000', borderRadius: '0px', boxShadow: '4px 4px 0px 0px black' }} itemStyle={{ color: '#000', fontWeight: 'bold' }} />
                                 <Legend wrapperStyle={{ paddingTop: '10px', fontWeight: 'bold' }} />
-                                <Line type="stepAfter" dataKey="total_sales" name="Total Sales" stroke="#0b2d69" strokeWidth={3} dot={{ r: 4, fill: '#fff', stroke: '#000', strokeWidth: 2 }} activeDot={{ r: 6, fill: '#000' }} />
+                                <Line type="monotone" dataKey="total_sales" name="Total Sales" stroke="#0b2d69" strokeWidth={3} dot={{ r: 5, fill: '#fff', stroke: '#0b2d69', strokeWidth: 2 }} activeDot={{ r: 7, fill: '#0b2d69' }} />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
@@ -120,10 +166,12 @@ function Dashboard() {
                         <ResponsiveContainer width="100%" height={300}>
                             <BarChart data={data.top_products}>
                                 <CartesianGrid strokeDasharray="3 3" stroke="#000" vertical={false} />
-                                <XAxis dataKey="item_name" stroke="#000" tick={{ fill: '#000', fontWeight: 'bold', fontSize: 12 }} axisLine={{ stroke: '#000', strokeWidth: 2 }} tickLine={{ stroke: '#000', strokeWidth: 2 }} />
+                                <XAxis dataKey="item_name" stroke="#000" tick={false} axisLine={{ stroke: '#000', strokeWidth: 2 }} tickLine={{ stroke: '#000', strokeWidth: 2 }} />
                                 <YAxis stroke="#000" tick={{ fill: '#000', fontWeight: 'bold', fontSize: 12 }} axisLine={{ stroke: '#000', strokeWidth: 2 }} tickLine={{ stroke: '#000', strokeWidth: 2 }} />
                                 <Tooltip contentStyle={{ backgroundColor: '#fff', border: '2px solid black', color: '#000', borderRadius: '0px', boxShadow: '4px 4px 0px 0px black' }} cursor={{fill: '#F0EDEC'}} />
-                                <Bar dataKey="revenue" name="Revenue" fill="#0b2d69" stroke="#000" strokeWidth={2} radius={[0, 0, 0, 0]} />
+                                <Bar dataKey="revenue" name="Revenue" fill="#0b2d69" stroke="#000" strokeWidth={2} radius={[0, 0, 0, 0]}>
+                                    <LabelList dataKey="display_label" content={<CustomBarLabel />} />
+                                </Bar>
                             </BarChart>
                         </ResponsiveContainer>
                     </div>

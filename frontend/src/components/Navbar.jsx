@@ -10,9 +10,9 @@ function Navbar() {
             <div className="links">
                 <ul>
                     <li><Link to="/">Dashboard</Link></li>
-                    <li><Link to="/Upload">Upload</Link></li>
-                    <li><Link to="/Predictions">Predictions</Link></li>
-                    <li><Link to="/Export">Export</Link></li>
+                    <li><Link to="/upload">Upload</Link></li>
+                    <li><Link to="/predictions">Predictions</Link></li>
+                    <li><Link to="/export">Export</Link></li>
                 </ul>
             </div>
         </div>

@@ -28,6 +28,7 @@ class SalesTrendPoint(BaseModel):
 class TopProduct(BaseModel):
     item_name: str
     revenue: float
+    quantity: int
 
 
 class ProfitLossByProduct(BaseModel):

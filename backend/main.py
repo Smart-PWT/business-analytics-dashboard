@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import init_db
-from app.routes import dashboard, predictions, upload
+from app.routes import dashboard, export, predictions, upload
 import os
 from contextlib import asynccontextmanager
 
@@ -35,6 +35,7 @@ app.add_middleware(
 app.include_router(upload.router)
 app.include_router(dashboard.router)
 app.include_router(predictions.router)
+app.include_router(export.router)
 
 
 @app.get("/")

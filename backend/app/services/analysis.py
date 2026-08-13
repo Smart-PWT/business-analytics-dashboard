@@ -61,7 +61,7 @@ def sales_trend(upload_id: int, start_date: str | None = None, end_date: str | N
     )
 
     return [
-        {"date": d.isoformat() if isinstance(d, date) else str(d), "total_sales": round(float(v), 2)}
+        {"date": str(d), "total_sales": round(float(v), 2)}
         for d, v in zip(daily["date"], daily["total_sales"])
     ]
 
@@ -74,14 +74,20 @@ def top_products(upload_id: int, limit: int = TOP_N_PRODUCTS) -> list[dict]:
 
     sales_df = df[df["transaction_type"].str.lower() == "sale"]
     grouped = (
-        sales_df.groupby("item_name")["total_amount"]
-        .sum()
-        .sort_values(ascending=False)
+        sales_df.groupby("item_name").agg(
+            total_amount=("total_amount", "sum"),
+            quantity=("quantity", "sum")
+        )
+        .sort_values(by="total_amount", ascending=False)
         .head(limit)
         .reset_index()
     )
     return [
-        {"item_name": row["item_name"], "revenue": round(float(row["total_amount"]), 2)}
+        {
+            "item_name": row["item_name"], 
+            "revenue": round(float(row["total_amount"]), 2),
+            "quantity": int(row["quantity"])
+        }
         for _, row in grouped.iterrows()
     ]
 

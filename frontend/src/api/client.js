@@ -70,3 +70,34 @@ export async function listUploads() {
   }
   return response.json();
 }
+
+/** Fetches a three-part preview (first / middle / last) of the cleaned dataset. */
+export async function getCleanedPreview(uploadId, n = 10) {
+  const response = await fetch(
+    `${API_BASE_URL}/api/export/${uploadId}/preview?n=${n}`
+  );
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.detail || "Could not load dataset preview.");
+  }
+  return data;
+}
+
+/** Triggers a browser download of the full cleaned dataset as a CSV file. */
+export async function exportCleanedCsv(uploadId) {
+  const response = await fetch(`${API_BASE_URL}/api/export/${uploadId}/csv`);
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.detail || "Export failed. Please try again.");
+  }
+
+  const blob = await response.blob();
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `cleaned_data_${uploadId}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}

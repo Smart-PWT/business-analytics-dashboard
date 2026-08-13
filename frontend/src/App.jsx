@@ -15,9 +15,9 @@ function App() {
       <Routes>
         <Route element = {<Layout />}>
           <Route path="/" element={<Dashboard />}></Route>
-          <Route path="/Upload" element={<Upload />}></Route>
-          <Route path="/Predictions" element={<Predictions />}></Route>
-          <Route path="/Export" element={<Export />}></Route>
+          <Route path="/upload" element={<Upload />}></Route>
+          <Route path="/predictions" element={<Predictions />}></Route>
+          <Route path="/export" element={<Export />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Route>
       </Routes>

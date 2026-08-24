@@ -4,7 +4,7 @@ import shutil
 import uuid
 from pathlib import Path
 
-from fastapi import APIRouter, File, HTTPException, UploadFile
+from fastapi import APIRouter, File, HTTPException, UploadFile, Form
 
 from app.config import UPLOADS_DIR
 from app.models.schemas import UploadResponse
@@ -17,8 +17,12 @@ ALLOWED_EXTENSIONS = {".csv"}
 
 
 @router.post("", response_model=UploadResponse)
-async def upload_file(file: UploadFile = File(...)):
+async def upload_file(
+    file: UploadFile = File(...),
+    user_id: str = Form(None)
+):
     """Process uploaded CSV file"""
+    print(f"DEBUG: Received upload request. File: {file.filename}, user_id: {user_id}")
     suffix = Path(file.filename).suffix.lower()
     if suffix not in ALLOWED_EXTENSIONS:
         raise HTTPException(
@@ -32,7 +36,7 @@ async def upload_file(file: UploadFile = File(...)):
         with open(temp_path, "wb") as f:
             shutil.copyfileobj(file.file, f)
 
-        result = ingest_file(temp_path, original_file_name=file.filename)
+        result = ingest_file(temp_path, original_file_name=file.filename, user_id=user_id)
 
         # Run predictions after cleaning
         try:

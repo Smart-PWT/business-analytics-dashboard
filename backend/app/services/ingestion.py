@@ -50,7 +50,7 @@ def _read_file(file_path: Path) -> pd.DataFrame:
         raise IngestionError("Could not read CSV file. Please ensure it is a valid CSV with correct encoding and separator.")
 
 
-def ingest_file(file_path: Path, original_file_name: str) -> dict:
+def ingest_file(file_path: Path, original_file_name: str, user_id: str | None = None) -> dict:
     """
     Full pipeline: read -> map columns -> validate -> clean -> persist.
 
@@ -64,8 +64,8 @@ def ingest_file(file_path: Path, original_file_name: str) -> dict:
     #    always have an audit trail, even if later steps fail.
     with get_connection() as conn:
         cursor = conn.execute(
-            "INSERT INTO uploads (file_name, upload_date, status) VALUES (?, ?, ?)",
-            (original_file_name, now_iso, "processing"),
+            "INSERT INTO uploads (file_name, upload_date, status, user_id) VALUES (?, ?, ?, ?)",
+            (original_file_name, now_iso, "processing", user_id),
         )
         upload_id = cursor.lastrowid
 

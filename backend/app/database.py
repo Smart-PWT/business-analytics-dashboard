@@ -14,7 +14,8 @@ CREATE TABLE IF NOT EXISTS uploads (
     file_name TEXT NOT NULL,
     upload_date TEXT NOT NULL,
     status TEXT NOT NULL DEFAULT 'processing',   -- Upload processing status value.
-    error_message TEXT
+    error_message TEXT,
+    user_id TEXT
 );
 
 CREATE TABLE IF NOT EXISTS transactions (

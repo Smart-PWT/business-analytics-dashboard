@@ -48,6 +48,20 @@
   transition-duration: 0.3s;
 }
 
+.login-container{
+  border: 2px solid black;
+  max-width: 35%;
+  margin-top: 10vh;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0px 2vw 0px 2vw;
+}
+
+.form-details{
+  display: flex;
+  flex-direction: column;
+}
+
 .body{
   background-color: #FCF9F8;
   display: flex;
@@ -722,4 +736,286 @@ td.amount {
   background-color: #d7d8d8;
   text-align: center;
   font-weight: bolder;
+}
+
+/* ============================================================
+   AUTH PAGES  (Login & Signup)
+   ============================================================ */
+
+.auth-page {
+  min-height: 100vh;
+  background-color: #FCF9F8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 380px;
+  border: 2px solid #1a1a1a;
+  box-shadow: 6px 6px 0px 0px #1a1a1a;
+  background-color: #fff;
+  padding: 0 0 28px 0;
+}
+
+/* ── Inverted top banner ── */
+.auth-banner {
+  background-color: #1a1a1a;
+  color: #fff;
+  text-align: center;
+  padding: 10px 20px;
+  letter-spacing: 0.12em;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-family: "Space Grotesk", sans-serif;
+  margin-bottom: 18px;
+}
+
+/* ── Page title ── */
+.auth-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0 24px;
+  margin-bottom: 20px;
+}
+
+/* ── Form ── */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 0 24px;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.auth-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #1a1a1a;
+  text-transform: uppercase;
+}
+
+.auth-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auth-forgot {
+  font-size: 11px;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.auth-forgot:hover {
+  color: #c49a28;
+}
+
+.auth-input {
+  border: 2px solid #1a1a1a;
+  background-color: #F0EDEC;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+  color: #1a1a1a;
+  outline: none;
+  transition: box-shadow 0.15s;
+}
+
+.auth-input::placeholder {
+  color: #999;
+}
+
+.auth-input:focus {
+  box-shadow: 3px 3px 0px 0px #1a1a1a;
+  background-color: #fff;
+}
+
+/* ── Gold CTA button ── */
+.auth-btn {
+  margin-top: 4px;
+  background-color: #d8b163;
+  color: #1a1a1a;
+  border: 2px solid #1a1a1a;
+  padding: 13px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px 0px #1a1a1a;
+  transition: all 0.15s;
+  width: 100%;
+}
+
+.auth-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px #1a1a1a;
+}
+
+.auth-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px #1a1a1a;
+}
+
+/* ── Error text ── */
+.auth-error {
+  color: #BB1C1C;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1.5px solid #BB1C1C;
+  padding: 8px 10px;
+  background-color: #fff0f0;
+}
+
+/* ── Divider ── */
+.auth-divider {
+  border: none;
+  border-top: 1px solid #1a1a1a;
+  margin: 24px 24px 16px 24px;
+}
+
+/* ── Footer text ── */
+.auth-switch {
+  font-size: 12px;
+  color: #1a1a1a;
+  padding: 0 24px;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.auth-link {
+  font-weight: 700;
+  color: #1a1a1a;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.auth-link:hover {
+  color: #c49a28;
+}
+
+.auth-note {
+  font-size: 11px;
+  color: #666;
+  padding: 0 24px;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* ── Auth responsive ── */
+@media (max-width: 480px) {
+  .auth-card {
+    box-shadow: 4px 4px 0px 0px #1a1a1a;
+  }
+
+  .auth-btn {
+    font-size: 13px;
+    padding: 12px;
+  }
+}
+
+/* ============================================================
+   AUTH TABS  (Login / Signup toggle)
+   ============================================================ */
+
+.auth-tabs {
+  display: flex;
+  border-bottom: 2px solid #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 11px 0;
+  background: #F0EDEC;
+  border: none;
+  border-right: 2px solid #1a1a1a;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #888;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+
+.auth-tab:last-child {
+  border-right: none;
+}
+
+.auth-tab:hover:not(.auth-tab--active) {
+  background: #e0dedd;
+  color: #1a1a1a;
+}
+
+.auth-tab--active {
+  background: #1a1a1a;
+  color: #d8b163;
+}
+
+/* ============================================================
+   NAVBAR ACCOUNT ICON
+   ============================================================ */
+
+.navbar {
+  justify-content: space-between;
+}
+
+.navbar-account {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  color: #fff;
+  margin-left: auto;
+  flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.navbar-account svg {
+  width: 18px;
+  height: 18px;
+}
+
+.navbar-account:hover {
+  background: #d8b163;
+  border-color: #d8b163;
+  color: #1a1a1a;
+}
+
+.profile{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5vw;
+}
+
+.profile h5{
+  color: white;
 }

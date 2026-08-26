@@ -1,4 +1,4 @@
-"""Dashboard analysis logic module."""
+"""dashboard analysis logic"""
 
 from datetime import date, datetime
 
@@ -20,7 +20,6 @@ def _load_transactions(upload_id: int) -> pd.DataFrame:
 
 
 def kpi_summary(upload_id: int) -> dict:
-    """Calculate KPI summary cards."""
     df = _load_transactions(upload_id)
     if df.empty:
         return {"total_revenue": 0, "total_orders": 0, "average_order_value": 0, "total_pending_dues": 0}
@@ -40,7 +39,6 @@ def kpi_summary(upload_id: int) -> dict:
 
 
 def sales_trend(upload_id: int, start_date: str | None = None, end_date: str | None = None) -> list[dict]:
-    """Calculate sales over time."""
     df = _load_transactions(upload_id)
     if df.empty:
         return []
@@ -67,7 +65,6 @@ def sales_trend(upload_id: int, start_date: str | None = None, end_date: str | N
 
 
 def top_products(upload_id: int, limit: int = TOP_N_PRODUCTS) -> list[dict]:
-    """Get top revenue products."""
     df = _load_transactions(upload_id)
     if df.empty:
         return []
@@ -87,7 +84,6 @@ def top_products(upload_id: int, limit: int = TOP_N_PRODUCTS) -> list[dict]:
 
 
 def profit_loss_summary(upload_id: int) -> dict:
-    """Calculate profit loss summary."""
     df = _load_transactions(upload_id)
     if df.empty:
         return {"total_profit_loss": 0, "by_product": []}
@@ -117,20 +113,21 @@ def profit_loss_summary(upload_id: int) -> dict:
 
 
 def party_wise_dues(upload_id: int) -> list[dict]:
-    """Get party wise dues."""
     df = _load_transactions(upload_id)
     if df.empty:
         return []
 
     today = pd.Timestamp(datetime.now().date())
 
-    grouped = df.groupby("party_name").agg(
-        total_pending=("amount_pending", "sum"),
-        oldest_unpaid_date=("transaction_date", "min"),
-    ).reset_index()
+    # sum pending
+    totals = df.groupby("party_name")["amount_pending"].sum().reset_index(name="total_pending")
+    totals = totals[totals["total_pending"] > 0]
 
-    # Filter parties with dues
-    grouped = grouped[grouped["total_pending"] > 0]
+    # oldest unpaid
+    unpaid_txns = df[df["amount_pending"] > 0]
+    oldest_dates = unpaid_txns.groupby("party_name")["transaction_date"].min().reset_index(name="oldest_unpaid_date")
+
+    grouped = pd.merge(totals, oldest_dates, on="party_name", how="inner")
     grouped["overdue_days"] = (today - grouped["oldest_unpaid_date"]).dt.days
 
     grouped = grouped.sort_values("total_pending", ascending=False)
@@ -145,8 +142,50 @@ def party_wise_dues(upload_id: int) -> list[dict]:
     ]
 
 
+def cleaned_dataset_preview(upload_id: int, sample_size: int = 10) -> dict:
+    """preview clean data"""
+    df = _load_transactions(upload_id)
+    total_rows = len(df)
+    if df.empty:
+        return {"total_rows": 0, "first": [], "middle": [], "last": []}
+
+    df = df.sort_values("id" if "id" in df.columns else "transaction_date").reset_index(drop=True)
+
+    def _rows_to_dicts(sub_df: pd.DataFrame) -> list[dict]:
+        out = []
+        for _, row in sub_df.iterrows():
+            out.append({
+                "transaction_date": row["transaction_date"].strftime("%Y-%m-%d") if pd.notna(row["transaction_date"]) else None,
+                "party_name": row["party_name"],
+                "item_name": row["item_name"],
+                "quantity": float(row["quantity"]),
+                "unit_price": round(float(row["unit_price"]), 2),
+                "total_amount": round(float(row["total_amount"]), 2),
+                "amount_paid": round(float(row["amount_paid"]), 2) if pd.notna(row["amount_paid"]) else 0.0,
+                "amount_pending": round(float(row["amount_pending"]), 2) if pd.notna(row["amount_pending"]) else 0.0,
+                "transaction_type": row["transaction_type"],
+            })
+        return out
+
+    n = min(sample_size, total_rows)
+    first_df = df.iloc[:n]
+    last_df = df.iloc[max(0, total_rows - n):]
+
+    # sample middle rows
+    middle_start = n
+    middle_end = max(n, total_rows - n)
+    middle_pool = df.iloc[middle_start:middle_end]
+    middle_df = middle_pool if len(middle_pool) <= n else middle_pool.sample(n=n).sort_index()
+
+    return {
+        "total_rows": total_rows,
+        "first": _rows_to_dicts(first_df),
+        "middle": _rows_to_dicts(middle_df),
+        "last": _rows_to_dicts(last_df),
+    }
+
+
 def full_dashboard(upload_id: int, start_date: str | None = None, end_date: str | None = None) -> dict:
-    """Aggregate all analysis views."""
     return {
         "kpi_summary": kpi_summary(upload_id),
         "sales_trend": sales_trend(upload_id, start_date, end_date),
@@ -154,3 +193,4 @@ def full_dashboard(upload_id: int, start_date: str | None = None, end_date: str 
         "profit_loss": profit_loss_summary(upload_id),
         "party_wise_dues": party_wise_dues(upload_id),
     }
+

@@ -1,10 +1,4 @@
-"""
-Schema validation — FR2.2, FR2.3.
-
-Runs after column_mapper has attempted to map raw headers to expected
-schema columns. Decides whether the upload can proceed or must be
-rejected with a clear, specific error (never a silent failure).
-"""
+"""validate data schema"""
 
 from dataclasses import dataclass, field
 
@@ -20,13 +14,8 @@ class ValidationResult:
 
 
 def validate_schema(column_mapping: dict[str, str | None]) -> ValidationResult:
-    """
-    Check that every required column (SRS Section 6) was successfully
-    mapped to a raw header. Optional columns are allowed to be missing.
-    """
-    missing_required = [
-        col for col in REQUIRED_COLUMNS if column_mapping.get(col) is None
-    ]
+    """check required columns"""
+    missing_required = [col for col in REQUIRED_COLUMNS if column_mapping.get(col) is None]
 
     if missing_required:
         return ValidationResult(
@@ -43,3 +32,4 @@ def validate_schema(column_mapping: dict[str, str | None]) -> ValidationResult:
         )
 
     return ValidationResult(is_valid=True, column_mapping=column_mapping)
+

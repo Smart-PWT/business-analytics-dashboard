@@ -1,4 +1,4 @@
-"""File upload API endpoints"""
+"""file upload endpoints"""
 
 import shutil
 import uuid
@@ -13,20 +13,18 @@ from app.services.predictions import run_predictions
 
 router = APIRouter(prefix="/api/upload", tags=["upload"])
 
-ALLOWED_EXTENSIONS = {".csv"}
+ALLOWED_EXTENSIONS = {".csv", ".xlsx", ".xls"}
 
 
 @router.post("", response_model=UploadResponse)
 async def upload_file(file: UploadFile = File(...)):
-    """Process uploaded CSV file"""
     suffix = Path(file.filename).suffix.lower()
     if suffix not in ALLOWED_EXTENSIONS:
         raise HTTPException(
             status_code=400,
-            detail=f"Unsupported file type '{suffix}'. Please upload a .csv file.",
+            detail=f"Unsupported file type '{suffix}'. Please upload a .csv or .xlsx file.",
         )
 
-    # Save to unique path
     temp_path = UPLOADS_DIR / f"{uuid.uuid4().hex}_{file.filename}"
     try:
         with open(temp_path, "wb") as f:
@@ -34,18 +32,17 @@ async def upload_file(file: UploadFile = File(...)):
 
         result = ingest_file(temp_path, original_file_name=file.filename)
 
-        # Run predictions after cleaning
+        # run predictions silently
         try:
             run_predictions(result["upload_id"])
-        except Exception:
-            # Ignore prediction failures here
-            pass
+        except Exception as exc:
+            print(f"[upload] prediction run failed for upload {result['upload_id']}: "
+                  f"{type(exc).__name__}: {exc}")
 
         return UploadResponse(**result)
 
     except IngestionError as exc:
         raise HTTPException(status_code=422, detail=exc.message)
     finally:
-        # Delete raw upload file
         if temp_path.exists():
             temp_path.unlink()

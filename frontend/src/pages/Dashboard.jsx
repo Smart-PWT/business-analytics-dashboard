@@ -14,32 +14,73 @@ const CustomBarLabel = (props) => {
     if (!value) return null;
     const parts = String(value).split("|||");
     const itemName = parts[0];
-    const qty = parts[1] ? ` (${parts[1]})` : "";
+    const revenue = parts[1] || "";
     
-    const maxChars = Math.max(0, Math.floor((height - 15) / 7));
+    const isShortBar = height < 30;
+    const revenueY = isShortBar ? y - 10 : y + 15;
+    const revenueColor = isShortBar ? "#000" : "#fff";
+
+    const availableHeight = isShortBar ? height - 10 : height - 30;
+    const maxChars = Math.max(0, Math.floor(availableHeight / 6));
     
-    let displayStr = itemName + qty;
-    if (displayStr.length > maxChars) {
-        const allowedLen = maxChars - qty.length - 2;
-        if (allowedLen > 0) {
-            displayStr = itemName.substring(0, allowedLen) + ".." + qty;
-        } else {
-            displayStr = (itemName + qty).substring(0, maxChars);
-        }
+    let showRotatedText = true;
+
+    // If the bar isn't tall enough to fit the full name comfortably,
+    // we simply hide the rotated label to avoid ugly "Tea.." truncations.
+    // The user can still read the full name on the X-axis.
+    if (itemName.length > maxChars) {
+        showRotatedText = false;
     }
 
     return (
-        <text
-            x={x + width / 2}
-            y={y + height - 10}
-            fill="#fff"
-            fontSize={12}
-            fontWeight="bold"
-            textAnchor="start"
-            transform={`rotate(-90, ${x + width / 2}, ${y + height - 10})`}
-        >
-            {displayStr}
-        </text>
+        <g>
+            <text
+                x={x + width / 2}
+                y={revenueY}
+                fill={revenueColor}
+                fontSize={12}
+                fontWeight="bold"
+                textAnchor="middle"
+            >
+                {revenue}
+            </text>
+            
+            {showRotatedText && (
+                <text
+                    x={x + width / 2}
+                    y={y + height - 10}
+                    fill="#fff"
+                    fontSize={12}
+                    fontWeight="bold"
+                    textAnchor="start"
+                    transform={`rotate(-90, ${x + width / 2}, ${y + height - 10})`}
+                >
+                    {itemName}
+                </text>
+            )}
+        </g>
+    );
+};
+
+const CustomXAxisTick = (props) => {
+    const { x, y, payload } = props;
+    const words = payload.value.split(" ");
+    
+    let line1 = payload.value;
+    let line2 = "";
+    
+    if (words.length > 1) {
+        line1 = words[0];
+        line2 = words.slice(1).join(" ");
+    }
+
+    return (
+        <g transform={`translate(${x},${y + 10})`}>
+            <text x={0} y={0} dy={16} textAnchor="middle" fill="#000" fontSize={12} fontWeight="bold">
+                <tspan x="0" dy="0">{line1}</tspan>
+                {line2 && <tspan x="0" dy="16">{line2}</tspan>}
+            </text>
+        </g>
     );
 };
 
@@ -59,7 +100,7 @@ function Dashboard() {
                     if (res && res.top_products) {
                         res.top_products = res.top_products.map(p => ({
                             ...p,
-                            display_label: `${p.item_name}|||${p.quantity}`
+                            display_label: `${p.item_name}|||${p.revenue}`
                         }));
                     }
                     setData(res);
@@ -121,15 +162,15 @@ function Dashboard() {
             <div className="kpi-grid">
                 <div className="kpi-card">
                     <h3>Total Revenue</h3>
-                    <p>${data.kpi_summary.total_revenue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                    <p>Rs. {data.kpi_summary.total_revenue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
                 </div>
                 <div className="kpi-card">
                     <h3>Average Order Value</h3>
-                    <p>${data.kpi_summary.average_order_value.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                    <p>Rs. {data.kpi_summary.average_order_value.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
                 </div>
                 <div className="kpi-card">
                     <h3>Total Pending</h3>
-                    <p>${data.kpi_summary.total_pending_dues.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                    <p>Rs. {data.kpi_summary.total_pending_dues.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
                 </div>
                 <div className="kpi-card">
                     <h3>Total Orders</h3>
@@ -163,12 +204,12 @@ function Dashboard() {
                 <div className="chart-card">
                     <h3>Top Products by Revenue</h3>
                     <div className="chart-wrapper">
-                        <ResponsiveContainer width="100%" height={300}>
-                            <BarChart data={data.top_products}>
+                        <ResponsiveContainer width="100%" height={340}>
+                            <BarChart data={data.top_products} margin={{ top: 20, right: 20, left: 10, bottom: 40 }}>
                                 <CartesianGrid strokeDasharray="3 3" stroke="#000" vertical={false} />
-                                <XAxis dataKey="item_name" stroke="#000" tick={false} axisLine={{ stroke: '#000', strokeWidth: 2 }} tickLine={{ stroke: '#000', strokeWidth: 2 }} />
+                                <XAxis dataKey="item_name" stroke="#000" tick={<CustomXAxisTick />} axisLine={{ stroke: '#000', strokeWidth: 2 }} tickLine={{ stroke: '#000', strokeWidth: 2 }} interval={0} />
                                 <YAxis stroke="#000" tick={{ fill: '#000', fontWeight: 'bold', fontSize: 12 }} axisLine={{ stroke: '#000', strokeWidth: 2 }} tickLine={{ stroke: '#000', strokeWidth: 2 }} />
-                                <Tooltip contentStyle={{ backgroundColor: '#fff', border: '2px solid black', color: '#000', borderRadius: '0px', boxShadow: '4px 4px 0px 0px black' }} cursor={{fill: '#F0EDEC'}} />
+                                <Tooltip contentStyle={{ backgroundColor: '#fff', border: '2px solid black', color: '#000', borderRadius: '0px', boxShadow: '4px 4px 0px 0px black' }} cursor={false} />
                                 <Bar dataKey="revenue" name="Revenue" fill="#0b2d69" stroke="#000" strokeWidth={2} radius={[0, 0, 0, 0]}>
                                     <LabelList dataKey="display_label" content={<CustomBarLabel />} />
                                 </Bar>
@@ -194,7 +235,7 @@ function Dashboard() {
                                 {data.party_wise_dues.map((party, idx) => (
                                     <tr key={idx}>
                                         <td>{party.party_name}</td>
-                                        <td className="amount">${party.amount_pending.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                                        <td className="amount">Rs. {party.amount_pending.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
                                         <td>{party.overdue_days} <span className="days-label">days</span></td>
                                     </tr>
                                 ))}

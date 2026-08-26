@@ -1,6 +1,4 @@
-"""
-Demand forecasting logic module.
-"""
+"""demand prediction logic"""
 
 from datetime import timedelta
 
@@ -10,25 +8,18 @@ from ..config import (
     DEMAND_FORECAST_HORIZON_DAYS,
     MIN_TRANSACTIONS_FOR_PREDICTION,
     TOP_N_PRODUCTS,
-    )
+)
 
 
-"""
-Predict daily average units.
-"""
-
-def _moving_average_forecast(daily_units: pd.Series, horizon_days: int, window: int = 7) -> float:
-  
+def _moving_average_forecast(daily_units: pd.Series, window: int = 7) -> float:
+    """get avg sales"""
     if daily_units.empty:
         return 0.0
-    recent = daily_units.tail(window)
-    return float(recent.mean())
+    return float(daily_units.tail(window).mean())
 
 
 def forecast_demand(transactions_df: pd.DataFrame, top_n: int = TOP_N_PRODUCTS) -> list[dict]:
-    """
-    Forecast top product demand.
-    """
+    """predict top products"""
     if transactions_df.empty:
         return []
 
@@ -38,7 +29,6 @@ def forecast_demand(transactions_df: pd.DataFrame, top_n: int = TOP_N_PRODUCTS) 
 
     df["transaction_date"] = pd.to_datetime(df["transaction_date"])
 
-    # Select top selling products.
     top_items = (
         df.groupby("item_name")["quantity"].sum().sort_values(ascending=False).head(top_n).index
     )
@@ -47,7 +37,6 @@ def forecast_demand(transactions_df: pd.DataFrame, top_n: int = TOP_N_PRODUCTS) 
     for item in top_items:
         item_df = df[df["item_name"] == item]
 
-        # Check minimum transaction count.
         if len(item_df) < MIN_TRANSACTIONS_FOR_PREDICTION:
             results.append({
                 "item_name": item,
@@ -57,12 +46,12 @@ def forecast_demand(transactions_df: pd.DataFrame, top_n: int = TOP_N_PRODUCTS) 
             })
             continue
 
-        # Aggregate daily sales data.
+        # add empty days
         daily = item_df.groupby(item_df["transaction_date"].dt.date)["quantity"].sum()
         full_range = pd.date_range(daily.index.min(), daily.index.max(), freq="D")
         daily = daily.reindex(full_range.date, fill_value=0)
 
-        avg_daily_units = _moving_average_forecast(daily, DEMAND_FORECAST_HORIZON_DAYS)
+        avg_daily_units = _moving_average_forecast(daily)
         predicted_units = round(avg_daily_units * DEMAND_FORECAST_HORIZON_DAYS, 1)
 
         results.append({
@@ -74,6 +63,7 @@ def forecast_demand(transactions_df: pd.DataFrame, top_n: int = TOP_N_PRODUCTS) 
 
     return results
 
+
 def forecast_dates(reference_date: pd.Timestamp, horizon_days: int = DEMAND_FORECAST_HORIZON_DAYS) -> list[str]:
-    """Generate forecast date strings."""
     return [(reference_date + timedelta(days=i)).strftime("%Y-%m-%d") for i in range(1, horizon_days + 1)]
+

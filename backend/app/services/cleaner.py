@@ -1,4 +1,4 @@
-"""Data cleaning pipeline module."""
+"""data cleaning pipeline"""
 
 import re
 from dataclasses import dataclass, field
@@ -11,7 +11,7 @@ from app.config import REQUIRED_COLUMNS
 @dataclass
 class CleaningResult:
     df: pd.DataFrame
-    log: list[dict] = field(default_factory=list)  # Log entry records
+    log: list[dict] = field(default_factory=list)
 
 
 def _log_entry(row_number: int, reason: str, raw_row: dict) -> dict:
@@ -19,15 +19,13 @@ def _log_entry(row_number: int, reason: str, raw_row: dict) -> dict:
 
 
 def _standardize_currency(value) -> float | None:
-    """Standardize currency values correctly."""
+    """extract currency number"""
     if pd.isna(value):
         return None
     if isinstance(value, (int, float)):
         return float(value)
 
-    text = str(value).strip()
-    # Extract numeric portion directly
-    text_no_commas = text.replace(",", "")
+    text_no_commas = str(value).strip().replace(",", "")
     match = re.search(r"-?\d+(?:\.\d+)?", text_no_commas)
     if not match:
         return None
@@ -39,33 +37,29 @@ def _standardize_currency(value) -> float | None:
 
 
 def _standardize_date(value):
-    """Standardize date formats properly."""
     return pd.to_datetime(value, errors="coerce", dayfirst=True)
 
 
 def clean_dataframe(df: pd.DataFrame) -> CleaningResult:
-    """Run full cleaning pipeline."""
     log: list[dict] = []
     working = df.copy()
     working.reset_index(drop=True, inplace=True)
 
-    # Remove duplicate rows
+    # drop duplicates
     dup_mask = working.duplicated(keep="first")
     for idx in working[dup_mask].index:
         log.append(_log_entry(int(idx), "duplicate row removed", working.loc[idx].to_dict()))
     working = working[~dup_mask].reset_index(drop=True)
 
-    # Standardize all dates
     if "transaction_date" in working.columns:
         working["transaction_date"] = working["transaction_date"].apply(_standardize_date)
 
-    # Standardize currency columns
     numeric_cols = ["quantity", "unit_price", "total_amount", "amount_paid", "amount_pending"]
     for col in numeric_cols:
         if col in working.columns:
             working[col] = working[col].apply(_standardize_currency)
 
-    # Drop missing required values
+    # drop missing rows
     rows_to_drop = []
     for idx, row in working.iterrows():
         missing_fields = [
@@ -81,20 +75,20 @@ def clean_dataframe(df: pd.DataFrame) -> CleaningResult:
             rows_to_drop.append(idx)
     working = working.drop(index=rows_to_drop).reset_index(drop=True)
 
-    # Fill missing optional defaults
+    # default amount paid
     if "amount_paid" not in working.columns:
         working["amount_paid"] = 0.0
     else:
         working["amount_paid"] = working["amount_paid"].fillna(0.0)
 
-    # Calculate pending amount
+    # default amount pending
     if "amount_pending" not in working.columns:
         working["amount_pending"] = working["total_amount"] - working["amount_paid"]
     else:
         computed = working["total_amount"] - working["amount_paid"]
         working["amount_pending"] = working["amount_pending"].fillna(computed)
 
-    # Default transaction type
+    # default tx type
     if "transaction_type" not in working.columns:
         working["transaction_type"] = "Sale"
     else:
@@ -102,3 +96,4 @@ def clean_dataframe(df: pd.DataFrame) -> CleaningResult:
         working["transaction_type"] = working["transaction_type"].replace("", "Sale")
 
     return CleaningResult(df=working, log=log)
+

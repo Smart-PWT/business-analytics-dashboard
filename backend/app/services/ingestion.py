@@ -1,12 +1,4 @@
-"""
-Ingestion orchestrator — ties together file parsing, column mapping,
-schema validation, cleaning, and persistence into a single pipeline.
-
-This is what app/routes/upload.py calls. Keeping the orchestration
-separate from the route handler means it's testable without spinning
-up FastAPI, and it's the natural place to plug in the Groq LLM mapper
-later (v2) as a pre-step before the rule-based column_mapper fallback.
-"""
+"""file ingestion pipeline"""
 
 import json
 from datetime import datetime, timezone
@@ -22,7 +14,7 @@ from app.services.validator import validate_schema
 
 
 class IngestionError(Exception):
-    """Raised when an upload cannot proceed (FR2.3 — clear, non-silent failure)."""
+    """upload failed error"""
     def __init__(self, message: str, missing_required: list[str] | None = None):
         super().__init__(message)
         self.message = message
@@ -30,20 +22,25 @@ class IngestionError(Exception):
 
 
 def _read_file(file_path: Path) -> pd.DataFrame:
-    """Load a CSV file into a DataFrame. Raises IngestionError on bad files."""
     suffix = file_path.suffix.lower()
+
+    if suffix in {".xlsx", ".xls"}:
+        try:
+            return pd.read_excel(file_path)
+        except Exception:
+            raise IngestionError(
+                "Could not read Excel file. Please ensure it isn't corrupted or password-protected."
+            )
+
     if suffix != ".csv":
-        raise IngestionError(f"Unsupported file type '{suffix}'. Please upload a .csv file.")
-    
+        raise IngestionError(f"Unsupported file type '{suffix}'. Please upload a .csv or .xlsx file.")
+
     try:
-        # Try default parsing first
         return pd.read_csv(file_path)
     except Exception:
-        # If it fails, try with different encodings and automatic separator detection
-        encodings_to_try = ["utf-8", "latin-1", "iso-8859-1", "cp1252"]
-        for encoding in encodings_to_try:
+        # try different encodings
+        for encoding in ["utf-8", "latin-1", "iso-8859-1", "cp1252"]:
             try:
-                # python engine with sep=None allows auto-detecting separators like ;
                 return pd.read_csv(file_path, encoding=encoding, sep=None, engine="python")
             except Exception:
                 continue
@@ -51,17 +48,9 @@ def _read_file(file_path: Path) -> pd.DataFrame:
 
 
 def ingest_file(file_path: Path, original_file_name: str) -> dict:
-    """
-    Full pipeline: read -> map columns -> validate -> clean -> persist.
-
-    Returns a summary dict with upload_id, row counts, and cleaning log
-    summary. Raises IngestionError for anything that should surface as
-    a 4xx to the API caller (bad schema, unreadable file, etc).
-    """
     now_iso = datetime.now(timezone.utc).isoformat()
 
-    # 1. Create the upload record up front (status='processing') so we
-    #    always have an audit trail, even if later steps fail.
+    # create upload record
     with get_connection() as conn:
         cursor = conn.execute(
             "INSERT INTO uploads (file_name, upload_date, status) VALUES (?, ?, ?)",
@@ -75,29 +64,27 @@ def ingest_file(file_path: Path, original_file_name: str) -> dict:
         if raw_df.empty:
             raise IngestionError("The uploaded file has no data rows.")
 
-        # 2. Map raw headers -> expected schema columns (rule-based, FR2.2 support)
         column_mapping = map_columns(list(raw_df.columns))
 
-        # 3. Validate required columns are present (FR2.2, FR2.3)
         result = validate_schema(column_mapping)
         if not result.is_valid:
             raise IngestionError(result.error_message, missing_required=result.missing_required)
 
-        # 4. Rename raw columns to standardized schema names, keep only expected columns
         rename_map = {raw: expected for expected, raw in column_mapping.items() if raw is not None}
         mapped_df = raw_df.rename(columns=rename_map)
         mapped_df = mapped_df[[c for c in ALL_EXPECTED_COLUMNS if c in mapped_df.columns]]
 
-        # 5. Run the cleaning pipeline (FR3.1-FR3.5)
         cleaning_result = clean_dataframe(mapped_df)
         clean_df = cleaning_result.df
+        
+        if "transaction_date" in clean_df.columns:
+            clean_df = clean_df.sort_values(by="transaction_date", ascending=True).reset_index(drop=True)
 
         if clean_df.empty:
             raise IngestionError(
                 "After cleaning, no valid rows remained (all rows were missing required data)."
             )
 
-        # 6. Persist cleaned transactions + cleaning log + upload status
         with get_connection() as conn:
             for _, row in clean_df.iterrows():
                 conn.execute(

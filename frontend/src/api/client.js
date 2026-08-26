@@ -92,7 +92,7 @@ export async function deleteUpload(uploadId) {
 /** Fetches a three-part preview (first / middle / last) of the cleaned dataset. */
 export async function getCleanedPreview(uploadId, n = 10) {
   const response = await fetch(
-    `${API_BASE_URL}/api/export/${uploadId}/preview?n=${n}`
+    `${API_BASE_URL}/api/dashboard/${uploadId}/cleaned-preview?sample_size=${n}`
   );
   const data = await response.json();
   if (!response.ok) {
@@ -103,7 +103,7 @@ export async function getCleanedPreview(uploadId, n = 10) {
 
 /** Triggers a browser download of the full cleaned dataset as a CSV file. */
 export async function exportCleanedCsv(uploadId) {
-  const response = await fetch(`${API_BASE_URL}/api/export/${uploadId}/csv`);
+  const response = await fetch(`${API_BASE_URL}/api/dashboard/${uploadId}/export`);
   if (!response.ok) {
     const data = await response.json().catch(() => ({}));
     throw new Error(data.detail || "Export failed. Please try again.");

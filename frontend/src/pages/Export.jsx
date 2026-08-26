@@ -281,16 +281,16 @@ function Export() {
                                             <td>{row.item_name}</td>
                                             <td>{row.quantity}</td>
                                             <td className="amount">
-                                                ${row.unit_price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                                Rs. {row.unit_price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                             </td>
                                             <td className="amount">
-                                                ${row.total_amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                                Rs. {row.total_amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                             </td>
                                             <td className="amount">
-                                                ${row.amount_paid.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                                Rs. {row.amount_paid.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                             </td>
                                             <td className="amount">
-                                                ${row.amount_pending.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                                Rs. {row.amount_pending.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                             </td>
                                             <td>{row.transaction_type}</td>
                                         </tr>
@@ -303,7 +303,7 @@ function Export() {
             </div>
             <br />
             <div className="export-actions">
-                <button className="upload-btn export-secondary-btn" onClick={() => navigate("/")}>
+                <button className="upload-btn export-secondary-btn" onClick={() => navigate("/dashboard")}>
                     EXPLORE DATASET MORE
                 </button>
                 <br />

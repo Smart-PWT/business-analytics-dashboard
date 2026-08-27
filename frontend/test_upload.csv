@@ -1,0 +1,321 @@
+transaction_date,party_name,item_name,quantity,unit_price,total_amount,amount_paid,transaction_type
+2025-03-24,Malik Enterprises,Detergent 500g,21,76.56,1607.76,0.0,Sale
+2025-04-04,ABC Traders,Milk Powder 400g,7,70.62,494.34,247.17,Sale
+2025-01-18,Rana Brothers,Rice 5kg,18,283.49,5102.82,0.0,Sale
+2025-02-27,ABC Traders,Biscuits Pack,19,268.17,5095.23,5095.23,Sale
+2025-05-23,Malik Enterprises,Tea Pack,14,129.34,1810.76,1810.76,Purchase
+2025-03-20,Malik Enterprises,Rice 5kg,19,364.16,6919.04,6919.04,Sale
+2025-01-25,XYZ Store,Biscuits Pack,2,390.46,780.92,390.46,Purchase
+2025-04-20,City Wholesale,Soap Bar,19,557.89,10599.91,10599.91,Sale
+2025-03-05,Malik Enterprises,Wheat Flour 10kg,3,365.93,1097.79,0.0,Sale
+2025-03-29,Prime Distributors,Tea Pack,20,589.1,11782.0,11782.0,Purchase
+2025-04-18,Malik Enterprises,Salt 1kg,5,563.3,2816.5,1408.25,Sale
+2025-06-21,XYZ Store,Milk Powder 400g,19,484.0,9196.0,9196.0,Sale
+2025-06-27,City Wholesale,Biscuits Pack,16,368.94,5903.04,2951.52,Sale
+2025-08-04,XYZ Store,Tea Pack,16,433.37,6933.92,6933.92,Sale
+2025-07-07,Fresh Mart,Biscuits Pack,22,502.06,11045.32,11045.32,Sale
+2025-06-21,City Wholesale,Sugar 1kg,15,245.51,3682.65,0.0,Sale
+2025-05-07,ABC Traders,Wheat Flour 10kg,25,208.09,5202.25,5202.25,Sale
+2025-04-11,Prime Distributors,Rice 5kg,6,297.05,1782.3,0.0,Sale
+2025-02-05,Green Valley Store,Milk Powder 400g,9,438.52,3946.68,3946.68,Sale
+2025-03-01,Malik Enterprises,Rice 5kg,6,133.21,799.26,799.26,Sale
+2025-05-05,Malik Enterprises,Tea Pack,10,52.25,522.5,261.25,Purchase
+2025-04-05,City Wholesale,Cooking Oil 1L,23,522.56,12018.88,0.0,Sale
+2025-04-27,Green Valley Store,Detergent 500g,13,266.77,3468.01,1734.01,Sale
+2025-01-16,Rana Brothers,Rice 5kg,7,292.34,2046.38,2046.38,Sale
+2025-06-03,ABC Traders,Rice 5kg,1,361.73,361.73,0.0,Sale
+2025-04-04,ABC Traders,Rice 5kg,7,387.74,2714.18,2714.18,Sale
+2025-03-30,City Wholesale,Soap Bar,4,113.44,453.76,226.88,Sale
+2025-05-03,Prime Distributors,Tea Pack,3,129.26,387.78,387.78,Sale
+2025-05-03,Malik Enterprises,Milk Powder 400g,1,162.87,162.87,0.0,Sale
+2025-02-07,ABC Traders,Milk Powder 400g,10,588.18,5881.8,5881.8,Sale
+2025-05-13,City Wholesale,Cooking Oil 1L,12,474.57,5694.84,0.0,Purchase
+2025-07-19,City Wholesale,Wheat Flour 10kg,20,496.33,9926.6,9926.6,Sale
+2025-07-29,Green Valley Store,Wheat Flour 10kg,7,334.7,2342.9,2342.9,Sale
+2025-01-08,Fresh Mart,Soap Bar,9,156.5,1408.5,0.0,Sale
+2025-04-25,City Wholesale,Salt 1kg,3,171.25,513.75,513.75,Sale
+2025-02-20,City Wholesale,Wheat Flour 10kg,16,393.24,6291.84,0.0,Sale
+2025-05-03,City Wholesale,Rice 5kg,22,115.95,2550.9,1275.45,Sale
+2025-05-03,Malik Enterprises,Detergent 500g,21,232.88,4890.48,2445.24,Sale
+2025-04-13,XYZ Store,Cooking Oil 1L,6,596.21,3577.26,3577.26,Sale
+2025-06-01,Prime Distributors,Cooking Oil 1L,20,504.58,10091.6,5045.8,Sale
+2025-02-09,Malik Enterprises,Sugar 1kg,1,489.65,489.65,489.65,Purchase
+2025-07-11,Malik Enterprises,Detergent 500g,7,504.39,3530.73,3530.73,Sale
+2025-03-06,Rana Brothers,Tea Pack,17,182.3,3099.1,0.0,Sale
+2025-03-08,Green Valley Store,Cooking Oil 1L,2,550.51,1101.02,1101.02,Sale
+2025-06-19,Green Valley Store,Milk Powder 400g,5,342.5,1712.5,0.0,Purchase
+2025-01-05,Prime Distributors,Cooking Oil 1L,20,52.16,1043.2,1043.2,Sale
+2025-02-06,Prime Distributors,Biscuits Pack,24,116.19,2788.56,2788.56,Sale
+2025-06-24,Prime Distributors,Rice 5kg,18,81.25,1462.5,1462.5,Sale
+2025-01-11,XYZ Store,Milk Powder 400g,15,358.95,5384.25,5384.25,Sale
+2025-03-25,Rana Brothers,Tea Pack,15,329.49,4942.35,2471.18,Purchase
+2025-03-05,Fresh Mart,Milk Powder 400g,7,512.0,3584.0,3584.0,Sale
+2025-02-01,Green Valley Store,Soap Bar,11,89.9,988.9,988.9,Sale
+2025-01-19,Rana Brothers,Tea Pack,4,543.36,2173.44,2173.44,Sale
+2025-02-06,Fresh Mart,Cooking Oil 1L,15,170.77,2561.55,2561.55,Sale
+2025-05-05,Malik Enterprises,Wheat Flour 10kg,6,438.48,2630.88,0.0,Sale
+2025-03-28,Green Valley Store,Wheat Flour 10kg,12,225.19,2702.28,2702.28,Sale
+2025-03-28,Prime Distributors,Soap Bar,23,59.95,1378.85,1378.85,Purchase
+2025-06-09,Fresh Mart,Milk Powder 400g,3,112.07,336.21,336.21,Sale
+2025-01-22,Fresh Mart,Tea Pack,2,548.24,1096.48,1096.48,Sale
+2025-07-13,Malik Enterprises,Detergent 500g,22,500.44,11009.68,11009.68,Sale
+2025-02-08,Prime Distributors,Salt 1kg,3,203.48,610.44,610.44,Sale
+2025-01-19,Fresh Mart,Sugar 1kg,21,98.71,2072.91,2072.91,Sale
+2025-06-05,Rana Brothers,Rice 5kg,9,524.53,4720.77,2360.39,Sale
+2025-03-28,Green Valley Store,Tea Pack,20,121.07,2421.4,0.0,Sale
+2025-01-29,Malik Enterprises,Tea Pack,2,149.63,299.26,299.26,Sale
+2025-05-16,Rana Brothers,Tea Pack,15,325.05,4875.75,4875.75,Sale
+2025-03-30,ABC Traders,Tea Pack,2,58.44,116.88,0.0,Purchase
+2025-02-18,Prime Distributors,Wheat Flour 10kg,15,108.45,1626.75,813.38,Sale
+2025-05-20,Green Valley Store,Milk Powder 400g,10,428.26,4282.6,4282.6,Sale
+2025-02-20,Malik Enterprises,Detergent 500g,12,590.04,7080.48,7080.48,Sale
+2025-01-19,Fresh Mart,Detergent 500g,6,80.47,482.82,241.41,Purchase
+2025-06-21,Fresh Mart,Biscuits Pack,8,430.98,3447.84,3447.84,Sale
+2025-02-17,Malik Enterprises,Tea Pack,15,51.99,779.85,779.85,Sale
+2025-05-21,City Wholesale,Wheat Flour 10kg,2,581.12,1162.24,1162.24,Sale
+2025-04-02,Malik Enterprises,Sugar 1kg,11,259.89,2858.79,1429.39,Sale
+2025-05-09,Rana Brothers,Wheat Flour 10kg,17,476.93,8107.81,8107.81,Sale
+2025-07-29,XYZ Store,Cooking Oil 1L,13,372.74,4845.62,2422.81,Sale
+2025-03-18,Fresh Mart,Wheat Flour 10kg,3,372.07,1116.21,0.0,Sale
+2025-06-18,Green Valley Store,Salt 1kg,24,591.6,14198.4,14198.4,Sale
+2025-07-05,Malik Enterprises,Sugar 1kg,23,540.57,12433.11,6216.56,Purchase
+2025-02-05,ABC Traders,Biscuits Pack,23,425.59,9788.57,9788.57,Sale
+2025-01-08,ABC Traders,Cooking Oil 1L,21,248.39,5216.19,5216.19,Sale
+2025-08-02,Prime Distributors,Milk Powder 400g,2,395.27,790.54,0.0,Sale
+2025-05-06,Fresh Mart,Sugar 1kg,15,488.73,7330.95,0.0,Purchase
+2025-01-24,XYZ Store,Soap Bar,9,495.07,4455.63,4455.63,Sale
+2025-07-06,Rana Brothers,Wheat Flour 10kg,24,407.46,9779.04,4889.52,Sale
+2025-08-05,Green Valley Store,Rice 5kg,16,550.76,8812.16,8812.16,Sale
+2025-06-07,Rana Brothers,Rice 5kg,20,131.08,2621.6,2621.6,Sale
+2025-06-09,Malik Enterprises,Sugar 1kg,16,83.36,1333.76,1333.76,Sale
+2025-06-27,Rana Brothers,Soap Bar,10,439.88,4398.8,4398.8,Sale
+2025-04-30,Prime Distributors,Rice 5kg,18,159.59,2872.62,2872.62,Sale
+2025-01-05,Fresh Mart,Soap Bar,3,500.94,1502.82,751.41,Sale
+2025-04-10,Rana Brothers,Wheat Flour 10kg,3,369.81,1109.43,1109.43,Purchase
+2025-03-09,City Wholesale,Cooking Oil 1L,20,501.12,10022.4,0.0,Sale
+2025-01-29,City Wholesale,Wheat Flour 10kg,16,543.74,8699.84,4349.92,Sale
+2025-01-07,Malik Enterprises,Sugar 1kg,16,424.87,6797.92,3398.96,Sale
+2025-07-06,Malik Enterprises,Detergent 500g,12,256.86,3082.32,3082.32,Sale
+2025-01-01,City Wholesale,Salt 1kg,13,116.02,1508.26,1508.26,Sale
+2025-07-09,Fresh Mart,Tea Pack,12,85.74,1028.88,514.44,Purchase
+2025-01-20,City Wholesale,Detergent 500g,25,201.34,5033.5,5033.5,Sale
+2025-01-27,ABC Traders,Tea Pack,21,564.57,11855.97,11855.97,Sale
+2025-04-22,City Wholesale,Wheat Flour 10kg,25,255.34,6383.5,3191.75,Sale
+2025-07-27,Green Valley Store,Milk Powder 400g,18,161.89,2914.02,2914.02,Sale
+2025-07-07,Green Valley Store,Soap Bar,20,463.97,9279.4,9279.4,Sale
+2025-01-13,Malik Enterprises,Cooking Oil 1L,16,278.18,4450.88,4450.88,Sale
+2025-03-07,Fresh Mart,Detergent 500g,21,181.27,3806.67,1903.34,Purchase
+2025-06-21,Green Valley Store,Rice 5kg,6,403.76,2422.56,2422.56,Sale
+2025-05-09,Prime Distributors,Milk Powder 400g,8,299.14,2393.12,2393.12,Sale
+2025-04-20,Malik Enterprises,Milk Powder 400g,7,184.25,1289.75,1289.75,Sale
+2025-05-23,XYZ Store,Salt 1kg,8,252.57,2020.56,0.0,Sale
+2025-01-06,Green Valley Store,Detergent 500g,14,460.21,6442.94,6442.94,Sale
+2025-03-11,City Wholesale,Sugar 1kg,16,202.63,3242.08,3242.08,Sale
+2025-06-25,Rana Brothers,Rice 5kg,9,543.23,4889.07,2444.53,Sale
+2025-06-15,Prime Distributors,Detergent 500g,10,516.78,5167.8,5167.8,Sale
+2025-01-09,Green Valley Store,Soap Bar,19,319.4,6068.6,6068.6,Sale
+2025-07-31,Prime Distributors,Soap Bar,8,480.71,3845.68,3845.68,Sale
+2025-02-08,XYZ Store,Soap Bar,3,353.33,1059.99,1059.99,Sale
+2025-07-20,Malik Enterprises,Wheat Flour 10kg,19,555.96,10563.24,10563.24,Sale
+2025-06-10,Fresh Mart,Milk Powder 400g,21,290.59,6102.39,6102.39,Sale
+2025-01-19,Fresh Mart,Milk Powder 400g,19,155.44,2953.36,2953.36,Sale
+2025-07-22,ABC Traders,Sugar 1kg,18,215.84,3885.12,1942.56,Sale
+2025-03-22,Rana Brothers,Soap Bar,17,179.12,3045.04,3045.04,Sale
+2025-04-16,Fresh Mart,Sugar 1kg,1,156.76,156.76,78.38,Sale
+2025-03-07,Rana Brothers,Detergent 500g,12,174.73,2096.76,2096.76,Sale
+2025-07-03,Green Valley Store,Salt 1kg,22,268.0,5896.0,5896.0,Sale
+2025-07-09,XYZ Store,Wheat Flour 10kg,16,583.42,9334.72,9334.72,Sale
+2025-03-01,Prime Distributors,Wheat Flour 10kg,9,468.26,4214.34,4214.34,Sale
+2025-06-09,Prime Distributors,Biscuits Pack,6,543.06,3258.36,1629.18,Sale
+2025-06-20,ABC Traders,Biscuits Pack,5,557.06,2785.3,2785.3,Sale
+2025-01-07,Malik Enterprises,Detergent 500g,2,440.42,880.84,880.84,Sale
+2025-04-26,City Wholesale,Rice 5kg,3,562.38,1687.14,1687.14,Sale
+2025-02-17,Prime Distributors,Sugar 1kg,10,415.44,4154.4,2077.2,Sale
+2025-03-26,Prime Distributors,Cooking Oil 1L,4,51.58,206.32,206.32,Sale
+2025-03-31,Green Valley Store,Rice 5kg,18,580.35,10446.3,10446.3,Sale
+2025-04-02,Fresh Mart,Detergent 500g,3,77.09,231.27,115.64,Sale
+2025-04-06,Prime Distributors,Wheat Flour 10kg,11,250.34,2753.74,1376.87,Sale
+2025-06-11,Green Valley Store,Wheat Flour 10kg,21,471.67,9905.07,9905.07,Sale
+2025-01-09,Prime Distributors,Rice 5kg,2,191.36,382.72,382.72,Purchase
+2025-03-28,City Wholesale,Tea Pack,11,576.73,6344.03,0.0,Sale
+2025-03-09,City Wholesale,Tea Pack,10,52.07,520.7,0.0,Sale
+2025-01-07,Rana Brothers,Rice 5kg,16,443.56,7096.96,3548.48,Sale
+2025-07-22,Fresh Mart,Detergent 500g,16,122.99,1967.84,983.92,Sale
+2025-01-03,Fresh Mart,Cooking Oil 1L,20,179.88,3597.6,3597.6,Sale
+2025-04-03,XYZ Store,Milk Powder 400g,7,265.43,1858.01,1858.01,Sale
+2025-04-15,XYZ Store,Sugar 1kg,16,353.93,5662.88,5662.88,Sale
+2025-04-20,XYZ Store,Rice 5kg,9,393.53,3541.77,3541.77,Sale
+2025-04-18,Prime Distributors,Soap Bar,6,178.81,1072.86,536.43,Sale
+2025-06-08,Rana Brothers,Milk Powder 400g,25,415.43,10385.75,10385.75,Sale
+2025-03-17,Fresh Mart,Biscuits Pack,9,255.13,2296.17,2296.17,Sale
+2025-04-23,Rana Brothers,Cooking Oil 1L,8,179.53,1436.24,1436.24,Purchase
+2025-02-18,City Wholesale,Rice 5kg,13,188.41,2449.33,2449.33,Purchase
+2025-05-15,Rana Brothers,Rice 5kg,21,305.15,6408.15,6408.15,Sale
+2025-01-02,Prime Distributors,Wheat Flour 10kg,15,552.91,8293.65,8293.65,Sale
+2025-03-01,XYZ Store,Sugar 1kg,7,380.27,2661.89,0.0,Sale
+2025-01-20,City Wholesale,Milk Powder 400g,6,297.01,1782.06,1782.06,Sale
+2025-01-28,City Wholesale,Wheat Flour 10kg,2,252.79,505.58,505.58,Sale
+2025-02-22,Fresh Mart,Sugar 1kg,20,452.73,9054.6,9054.6,Sale
+2025-07-29,City Wholesale,Detergent 500g,22,254.5,5599.0,0.0,Sale
+2025-01-20,Rana Brothers,Sugar 1kg,16,351.42,5622.72,5622.72,Sale
+2025-01-26,Green Valley Store,Milk Powder 400g,5,401.55,2007.75,2007.75,Sale
+2025-04-12,Fresh Mart,Detergent 500g,10,417.3,4173.0,2086.5,Sale
+2025-03-21,City Wholesale,Detergent 500g,14,60.02,840.28,840.28,Sale
+2025-04-11,Green Valley Store,Wheat Flour 10kg,1,288.79,288.79,288.79,Sale
+2025-01-30,XYZ Store,Detergent 500g,19,535.56,10175.64,5087.82,Sale
+2025-02-03,ABC Traders,Sugar 1kg,18,128.37,2310.66,1155.33,Sale
+2025-05-27,City Wholesale,Milk Powder 400g,6,130.24,781.44,781.44,Sale
+2025-05-14,Malik Enterprises,Rice 5kg,4,261.05,1044.2,1044.2,Sale
+2025-02-02,ABC Traders,Soap Bar,11,79.36,872.96,436.48,Sale
+2025-07-02,Malik Enterprises,Wheat Flour 10kg,20,272.47,5449.4,5449.4,Sale
+2025-02-16,Rana Brothers,Sugar 1kg,13,566.2,7360.6,7360.6,Sale
+2025-04-02,XYZ Store,Cooking Oil 1L,8,583.88,4671.04,4671.04,Sale
+2025-05-24,ABC Traders,Salt 1kg,4,264.41,1057.64,528.82,Purchase
+2025-08-06,Fresh Mart,Detergent 500g,10,370.44,3704.4,1852.2,Sale
+2025-06-18,City Wholesale,Soap Bar,17,291.09,4948.53,4948.53,Sale
+2025-06-08,Prime Distributors,Soap Bar,8,295.75,2366.0,0.0,Sale
+2025-08-03,Malik Enterprises,Soap Bar,13,108.89,1415.57,1415.57,Sale
+2025-04-21,City Wholesale,Rice 5kg,15,327.39,4910.85,4910.85,Sale
+2025-06-12,Malik Enterprises,Rice 5kg,24,222.55,5341.2,0.0,Sale
+2025-01-14,Green Valley Store,Cooking Oil 1L,1,521.39,521.39,0.0,Sale
+2025-02-19,Malik Enterprises,Soap Bar,10,576.15,5761.5,5761.5,Sale
+2025-01-17,City Wholesale,Biscuits Pack,25,188.72,4718.0,4718.0,Purchase
+2025-03-12,Prime Distributors,Cooking Oil 1L,9,326.22,2935.98,1467.99,Sale
+2025-06-01,Fresh Mart,Biscuits Pack,17,180.57,3069.69,3069.69,Sale
+2025-02-20,Malik Enterprises,Detergent 500g,6,400.11,2400.66,2400.66,Sale
+2025-04-07,Malik Enterprises,Tea Pack,4,472.55,1890.2,1890.2,Sale
+2025-04-26,XYZ Store,Tea Pack,18,396.38,7134.84,3567.42,Sale
+2025-03-09,Green Valley Store,Salt 1kg,19,130.41,2477.79,2477.79,Sale
+2025-04-24,Rana Brothers,Cooking Oil 1L,20,458.98,9179.6,9179.6,Sale
+2025-07-29,Fresh Mart,Tea Pack,21,581.28,12206.88,0.0,Sale
+2025-07-07,ABC Traders,Sugar 1kg,8,132.15,1057.2,0.0,Sale
+2025-04-17,City Wholesale,Sugar 1kg,5,318.62,1593.1,0.0,Sale
+2025-01-06,ABC Traders,Sugar 1kg,19,245.23,4659.37,4659.37,Purchase
+2025-04-02,Rana Brothers,Detergent 500g,19,215.64,4097.16,4097.16,Sale
+2025-04-04,Prime Distributors,Cooking Oil 1L,5,57.76,288.8,288.8,Sale
+2025-04-26,XYZ Store,Rice 5kg,21,129.58,2721.18,2721.18,Sale
+2025-07-27,Fresh Mart,Sugar 1kg,2,404.72,809.44,0.0,Sale
+2025-06-02,Prime Distributors,Biscuits Pack,17,453.44,7708.48,7708.48,Sale
+2025-01-01,ABC Traders,Sugar 1kg,18,63.87,1149.66,1149.66,Sale
+2025-02-10,ABC Traders,Rice 5kg,1,386.95,386.95,386.95,Sale
+2025-04-16,Rana Brothers,Milk Powder 400g,20,403.48,8069.6,4034.8,Purchase
+2025-02-14,Fresh Mart,Rice 5kg,10,394.28,3942.8,1971.4,Purchase
+2025-01-02,Green Valley Store,Detergent 500g,24,551.74,13241.76,13241.76,Sale
+2025-02-14,Rana Brothers,Rice 5kg,9,177.76,1599.84,1599.84,Sale
+2025-03-27,Fresh Mart,Sugar 1kg,9,399.73,3597.57,1798.79,Purchase
+2025-03-09,Fresh Mart,Wheat Flour 10kg,3,534.02,1602.06,1602.06,Sale
+2025-03-08,Rana Brothers,Wheat Flour 10kg,6,460.38,2762.28,2762.28,Sale
+2025-04-10,City Wholesale,Biscuits Pack,8,258.7,2069.6,0.0,Sale
+2025-05-01,ABC Traders,Sugar 1kg,14,575.63,8058.82,8058.82,Purchase
+2025-03-20,Rana Brothers,Detergent 500g,20,371.93,7438.6,0.0,Sale
+2025-02-07,ABC Traders,Sugar 1kg,4,108.67,434.68,434.68,Sale
+2025-02-06,ABC Traders,Sugar 1kg,2,126.12,252.24,252.24,Sale
+2025-07-08,ABC Traders,Rice 5kg,19,468.97,8910.43,8910.43,Purchase
+2025-06-20,XYZ Store,Detergent 500g,4,185.62,742.48,742.48,Sale
+2025-01-09,ABC Traders,Rice 5kg,25,397.35,9933.75,9933.75,Sale
+2025-01-26,Malik Enterprises,Rice 5kg,25,405.48,10137.0,10137.0,Sale
+2025-03-28,Green Valley Store,Tea Pack,1,243.0,243.0,243.0,Sale
+2025-07-03,City Wholesale,Salt 1kg,25,580.2,14505.0,0.0,Sale
+2025-08-06,Fresh Mart,Biscuits Pack,24,67.04,1608.96,804.48,Sale
+2025-04-22,XYZ Store,Salt 1kg,16,437.56,7000.96,0.0,Purchase
+2025-02-25,XYZ Store,Biscuits Pack,10,143.7,1437.0,1437.0,Purchase
+2025-02-21,Fresh Mart,Sugar 1kg,1,241.29,241.29,241.29,Sale
+2025-06-27,Malik Enterprises,Soap Bar,19,240.95,4578.05,0.0,Sale
+2025-05-28,Malik Enterprises,Tea Pack,7,566.06,3962.42,3962.42,Sale
+2025-02-12,XYZ Store,Rice 5kg,16,483.35,7733.6,0.0,Sale
+2025-06-10,City Wholesale,Salt 1kg,4,270.7,1082.8,541.4,Sale
+2025-04-19,ABC Traders,Salt 1kg,7,216.73,1517.11,758.55,Purchase
+2025-05-09,Malik Enterprises,Detergent 500g,21,178.47,3747.87,1873.93,Sale
+2025-05-17,ABC Traders,Salt 1kg,19,229.66,4363.54,4363.54,Sale
+2025-06-19,City Wholesale,Cooking Oil 1L,15,291.34,4370.1,4370.1,Purchase
+2025-03-01,Malik Enterprises,Salt 1kg,15,403.49,6052.35,6052.35,Purchase
+2025-02-19,Fresh Mart,Tea Pack,25,436.74,10918.5,0.0,Sale
+2025-07-05,Malik Enterprises,Wheat Flour 10kg,24,229.61,5510.64,0.0,Sale
+2025-02-11,Rana Brothers,Salt 1kg,7,192.28,1345.96,1345.96,Sale
+2025-06-18,XYZ Store,Wheat Flour 10kg,13,133.03,1729.39,1729.39,Sale
+2025-07-07,Fresh Mart,Detergent 500g,9,157.91,1421.19,1421.19,Sale
+2025-02-22,Green Valley Store,Soap Bar,2,56.94,113.88,56.94,Sale
+2025-05-09,Fresh Mart,Soap Bar,1,128.0,128.0,0.0,Sale
+2025-01-02,Rana Brothers,Detergent 500g,23,365.69,8410.87,4205.44,Sale
+2025-06-20,Rana Brothers,Cooking Oil 1L,21,118.32,2484.72,1242.36,Sale
+2025-03-08,XYZ Store,Detergent 500g,8,480.31,3842.48,3842.48,Sale
+2025-08-06,Green Valley Store,Soap Bar,15,60.81,912.15,456.07,Purchase
+2025-06-22,Malik Enterprises,Salt 1kg,25,55.85,1396.25,698.12,Sale
+2025-01-10,Fresh Mart,Milk Powder 400g,7,138.46,969.22,969.22,Purchase
+2025-03-31,XYZ Store,Biscuits Pack,15,347.57,5213.55,2606.78,Purchase
+2025-01-05,City Wholesale,Milk Powder 400g,11,275.69,3032.59,1516.3,Sale
+2025-06-25,Malik Enterprises,Detergent 500g,17,469.49,7981.33,7981.33,Purchase
+2025-04-02,ABC Traders,Tea Pack,9,260.01,2340.09,2340.09,Sale
+2025-01-20,Green Valley Store,Detergent 500g,21,434.04,9114.84,9114.84,Purchase
+2025-03-09,XYZ Store,Wheat Flour 10kg,10,457.81,4578.1,0.0,Sale
+2025-07-25,Green Valley Store,Soap Bar,7,140.49,983.43,983.43,Sale
+2025-05-01,Rana Brothers,Cooking Oil 1L,12,416.32,4995.84,2497.92,Sale
+2025-03-17,Malik Enterprises,Soap Bar,12,480.98,5771.76,5771.76,Sale
+2025-06-30,Green Valley Store,Tea Pack,14,423.35,5926.9,2963.45,Sale
+2025-07-26,Fresh Mart,Salt 1kg,8,409.92,3279.36,3279.36,Sale
+2025-05-05,Green Valley Store,Biscuits Pack,21,96.98,2036.58,2036.58,Sale
+2025-03-19,Green Valley Store,Sugar 1kg,3,505.34,1516.02,1516.02,Sale
+2025-05-16,City Wholesale,Biscuits Pack,1,411.52,411.52,411.52,Sale
+2025-06-17,Fresh Mart,Tea Pack,20,105.83,2116.6,2116.6,Sale
+2025-02-17,Prime Distributors,Salt 1kg,5,164.7,823.5,411.75,Purchase
+2025-02-12,XYZ Store,Milk Powder 400g,21,511.34,10738.14,10738.14,Sale
+2025-06-27,Rana Brothers,Milk Powder 400g,3,458.05,1374.15,687.08,Sale
+2025-05-23,XYZ Store,Tea Pack,14,178.8,2503.2,2503.2,Sale
+2025-05-07,ABC Traders,Soap Bar,15,548.0,8220.0,4110.0,Sale
+2025-05-08,Malik Enterprises,Milk Powder 400g,20,524.58,10491.6,10491.6,Sale
+2025-08-04,City Wholesale,Soap Bar,23,359.41,8266.43,8266.43,Sale
+2025-04-06,Green Valley Store,Detergent 500g,22,91.47,2012.34,2012.34,Sale
+2025-01-06,ABC Traders,Salt 1kg,4,330.84,1323.36,661.68,Sale
+2025-01-09,Rana Brothers,Detergent 500g,21,119.8,2515.8,2515.8,Sale
+2025-03-29,Prime Distributors,Milk Powder 400g,18,473.82,8528.76,8528.76,Sale
+2025-04-22,City Wholesale,Detergent 500g,9,354.72,3192.48,3192.48,Sale
+2025-04-01,Prime Distributors,Detergent 500g,11,327.06,3597.66,3597.66,Purchase
+2025-03-30,Rana Brothers,Soap Bar,4,231.99,927.96,927.96,Sale
+2025-02-02,XYZ Store,Sugar 1kg,13,447.47,5817.11,2908.55,Purchase
+2025-05-27,ABC Traders,Detergent 500g,10,109.68,1096.8,1096.8,Sale
+2025-07-30,Prime Distributors,Biscuits Pack,25,411.91,10297.75,0.0,Purchase
+2025-06-06,Green Valley Store,Biscuits Pack,5,394.75,1973.75,0.0,Sale
+2025-02-24,ABC Traders,Soap Bar,21,469.47,9858.87,9858.87,Sale
+2025-01-10,Green Valley Store,Rice 5kg,21,57.38,1204.98,1204.98,Sale
+2025-05-24,Fresh Mart,Tea Pack,6,281.98,1691.88,1691.88,Sale
+2025-04-21,ABC Traders,Soap Bar,19,337.18,6406.42,6406.42,Sale
+2025-05-28,Green Valley Store,Soap Bar,3,57.77,173.31,86.66,Purchase
+2025-06-01,Malik Enterprises,Soap Bar,25,276.83,6920.75,6920.75,Sale
+2025-06-14,Prime Distributors,Wheat Flour 10kg,5,394.79,1973.95,986.98,Sale
+2025-01-03,XYZ Store,Rice 5kg,7,528.25,3697.75,3697.75,Sale
+2025-01-05,Fresh Mart,Biscuits Pack,8,297.93,2383.44,2383.44,Sale
+2025-04-04,Malik Enterprises,Rice 5kg,10,395.74,3957.4,1978.7,Sale
+2025-06-21,Fresh Mart,Sugar 1kg,23,67.58,1554.34,1554.34,Sale
+2025-06-16,XYZ Store,Detergent 500g,10,221.87,2218.7,0.0,Sale
+2025-08-09,Prime Distributors,Biscuits Pack,2,223.95,447.9,0.0,Sale
+2025-05-01,Malik Enterprises,Cooking Oil 1L,4,249.8,999.2,999.2,Sale
+2025-05-03,Green Valley Store,Soap Bar,9,481.54,4333.86,0.0,Sale
+2025-03-16,Fresh Mart,Sugar 1kg,20,585.67,11713.4,0.0,Sale
+2025-06-05,ABC Traders,Cooking Oil 1L,20,507.94,10158.8,0.0,Sale
+2025-03-05,Green Valley Store,Detergent 500g,22,256.91,5652.02,5652.02,Sale
+2025-03-14,ABC Traders,Salt 1kg,9,197.41,1776.69,1776.69,Purchase
+2025-07-28,ABC Traders,Tea Pack,5,496.46,2482.3,0.0,Sale
+2025-03-12,Prime Distributors,Salt 1kg,18,96.78,1742.04,0.0,Sale
+2025-07-24,Green Valley Store,Wheat Flour 10kg,25,447.2,11180.0,11180.0,Sale
+2025-06-05,ABC Traders,Detergent 500g,15,439.59,6593.85,6593.85,Purchase
+2025-07-12,ABC Traders,Detergent 500g,15,347.31,5209.65,0.0,Sale
+2025-07-17,XYZ Store,Wheat Flour 10kg,13,368.77,4794.01,4794.01,Purchase
+2025-03-24,Prime Distributors,Milk Powder 400g,19,161.03,3059.57,3059.57,Sale
+2025-01-24,Malik Enterprises,Tea Pack,12,367.83,4413.96,4413.96,Sale
+2025-07-19,Malik Enterprises,Wheat Flour 10kg,2,557.44,1114.88,557.44,Sale
+2025-01-28,City Wholesale,Soap Bar,3,135.89,407.67,0.0,Sale
+2025-03-30,Fresh Mart,Milk Powder 400g,20,61.31,1226.2,1226.2,Sale
+2025-05-25,Prime Distributors,Biscuits Pack,19,167.47,3181.93,3181.93,Sale
+2025-01-25,Prime Distributors,Biscuits Pack,20,579.91,11598.2,11598.2,Sale
+2025-03-28,Rana Brothers,Cooking Oil 1L,13,96.01,1248.13,1248.13,Sale
+2025-05-23,City Wholesale,Soap Bar,16,570.96,9135.36,9135.36,Purchase
+2025-06-13,Green Valley Store,Rice 5kg,23,577.61,13285.03,13285.03,Sale
+2025-05-25,Rana Brothers,Rice 5kg,22,328.58,7228.76,7228.76,Sale
+2025-08-06,Malik Enterprises,Salt 1kg,8,595.44,4763.52,4763.52,Sale
+2025-01-10,Fresh Mart,Salt 1kg,2,546.51,1093.02,1093.02,Sale
+2025-03-08,Prime Distributors,Sugar 1kg,4,129.64,518.56,518.56,Sale
+2025-06-23,Fresh Mart,Biscuits Pack,19,292.7,5561.3,5561.3,Sale
+2025-03-24,City Wholesale,Tea Pack,13,118.28,1537.64,768.82,Sale
+2025-02-13,Prime Distributors,Wheat Flour 10kg,5,552.86,2764.3,2764.3,Sale
+2025-07-03,Rana Brothers,Sugar 1kg,6,560.22,3361.32,3361.32,Sale
+2025-06-08,City Wholesale,Cooking Oil 1L,25,295.98,7399.5,7399.5,Sale

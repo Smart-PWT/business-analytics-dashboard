@@ -1,16 +1,23 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-
-from app.database import init_db
-from app.routes import dashboard, export, predictions, upload
 import os
 from contextlib import asynccontextmanager
+from pathlib import Path
+from dotenv import load_dotenv
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+# load env explicitly
+_ENV_PATH = Path(__file__).resolve().parent / ".env"
+load_dotenv(dotenv_path=_ENV_PATH)
+if os.environ.get("GROQ_API_KEY"):
+    print(f"[main] GROQ_API_KEY loaded ({len(os.environ['GROQ_API_KEY'])} chars) from {_ENV_PATH}")
+else:
+    print(f"[main] WARNING: GROQ_API_KEY not found. Expected .env at: {_ENV_PATH}")
+from app.config import DB_PATH
+from app.database import get_connection, init_db
+from app.routes import dashboard, export, predictions, upload
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Start fresh on every startup
-    if os.path.exists("app.db"):
-        os.remove("app.db")
+    # initialize the database
     init_db()
     yield
 
@@ -18,12 +25,9 @@ app = FastAPI(
     title="hisaabi API",
     description="Small Business Analytics Dashboard — backend (ingestion, cleaning, analysis, predictions).",
     version="1.0.0",
-    lifespan=lifespan
+    lifespan=lifespan,
 )
 
-# CORS: wide open for local dev so the Vite frontend (localhost:5173 by
-# default) can call this API without extra config. Tighten this to
-# specific origins before any real deployment.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -37,16 +41,13 @@ app.include_router(dashboard.router)
 app.include_router(predictions.router)
 app.include_router(export.router)
 
-
 @app.get("/")
 def root():
     return {"status": "ok", "message": "hisaabi backend is running. See /docs for API reference."}
 
-
 @app.get("/api/uploads")
 def list_uploads():
-    """Convenience endpoint: list all uploads with their status, for debugging/frontend history view."""
-    from app.database import get_connection
+    """shows past file uploads"""
     with get_connection() as conn:
         rows = conn.execute(
             "SELECT id, file_name, upload_date, status, error_message FROM uploads ORDER BY id DESC"

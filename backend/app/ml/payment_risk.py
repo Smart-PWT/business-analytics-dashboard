@@ -1,6 +1,4 @@
-"""
-Payment risk prediction logic.
-"""
+"""predict payment risk"""
 
 import numpy as np
 import pandas as pd
@@ -9,17 +7,19 @@ from sklearn.preprocessing import StandardScaler
 
 from app.config import MIN_TRANSACTIONS_FOR_PREDICTION, RISK_LABELS
 
+# only real overdue
+OVERDUE_AGE_THRESHOLD_DAYS = 15
+
 
 def _build_party_features(transactions_df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Build party feature rows.
-    """
     df = transactions_df.copy()
     df["transaction_date"] = pd.to_datetime(df["transaction_date"])
     today = pd.Timestamp(pd.Timestamp.now().date())
 
-    df["is_overdue"] = df["amount_pending"] > 0
     df["days_since_txn"] = (today - df["transaction_date"]).dt.days
+
+    # actually overdue
+    df["is_overdue"] = (df["amount_pending"] > 0) & (df["days_since_txn"] >= OVERDUE_AGE_THRESHOLD_DAYS)
 
     grouped = df.groupby("party_name").agg(
         order_count=("total_amount", "count"),
@@ -34,32 +34,28 @@ def _build_party_features(transactions_df: pd.DataFrame) -> pd.DataFrame:
 
 
 def _rule_based_label(row: pd.Series) -> str:
-    """
-    Calculate rule based labels.
-    """
+    """calc risk level"""
     pct_due = row["pct_orders_with_dues"]
     overdue_age = row["avg_days_since_overdue_txn"]
 
     if pct_due == 0:
         return "Low"
-    if pct_due < 0.3 and overdue_age < 30:
+    if pct_due < 0.2 and overdue_age < 30:
         return "Low"
-    if pct_due < 0.6 or overdue_age < 60:
-        return "Medium"
-    return "High"
+    if pct_due >= 0.5 and overdue_age >= 60:
+        return "High"
+    if pct_due >= 0.6 or overdue_age >= 90:
+        return "High"
+    return "Medium"
 
 
 def predict_payment_risk(transactions_df: pd.DataFrame) -> list[dict]:
-    """
-    Predict party payment risks.
-    """
     if transactions_df.empty:
         return []
 
     df = transactions_df.copy()
     features = _build_party_features(df)
 
-    # Split by data sufficiency.
     txn_counts = df.groupby("party_name").size()
     enough_data_parties = txn_counts[txn_counts >= MIN_TRANSACTIONS_FOR_PREDICTION].index
     insufficient_parties = txn_counts[txn_counts < MIN_TRANSACTIONS_FOR_PREDICTION].index
@@ -72,14 +68,13 @@ def predict_payment_risk(transactions_df: pd.DataFrame) -> list[dict]:
     if eligible.empty:
         return results
 
-    # Build heuristic fallback labels.
     eligible["heuristic_label"] = eligible.apply(_rule_based_label, axis=1)
 
     label_diversity = eligible["heuristic_label"].nunique()
-    enough_rows_to_train = len(eligible) >= 10  # Check training row count.
+    enough_rows_to_train = len(eligible) >= 10
 
     if label_diversity >= 2 and enough_rows_to_train:
-        # Fit logistic regression model.
+        # train ml model
         feature_cols = ["order_count", "avg_order_value", "pct_orders_with_dues", "avg_days_since_overdue_txn"]
         X = eligible[feature_cols].values
         y = eligible["heuristic_label"].values
@@ -94,12 +89,15 @@ def predict_payment_risk(transactions_df: pd.DataFrame) -> list[dict]:
         for party, label in zip(eligible["party_name"], predicted_labels):
             results.append({"party_name": party, "status": "ok", "risk_label": str(label)})
     else:
-        # Apply rule based fallback.
         for _, row in eligible.iterrows():
             results.append({
                 "party_name": row["party_name"],
                 "status": "ok",
                 "risk_label": row["heuristic_label"],
             })
+
+    # sort by risk level
+    risk_order = {"High": 0, "Medium": 1, "Low": 2, None: 3}
+    results.sort(key=lambda x: (risk_order.get(x["risk_label"], 4), x["party_name"]))
 
     return results

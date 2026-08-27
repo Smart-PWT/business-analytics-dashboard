@@ -1,6 +1,4 @@
-"""
-Pydantic response schema definitions.
-"""
+"""api response formats"""
 
 from pydantic import BaseModel
 
@@ -59,14 +57,14 @@ class DashboardResponse(BaseModel):
 
 class DemandForecastItem(BaseModel):
     item_name: str
-    status: str  # Forecast data status flag.
+    status: str
     predicted_units_next_30_days: float | None
     avg_daily_units: float | None
 
 
 class PaymentRiskItem(BaseModel):
     party_name: str
-    status: str  # Risk data status flag.
+    status: str
     risk_label: str | None
 
 

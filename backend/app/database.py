@@ -1,6 +1,4 @@
-"""
-SQLite database interaction layer.
-"""
+"""manages sqlite db"""
 
 import sqlite3
 from contextlib import contextmanager
@@ -13,7 +11,7 @@ CREATE TABLE IF NOT EXISTS uploads (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     file_name TEXT NOT NULL,
     upload_date TEXT NOT NULL,
-    status TEXT NOT NULL DEFAULT 'processing',   -- Upload processing status value.
+    status TEXT NOT NULL DEFAULT 'processing',
     error_message TEXT
 );
 
@@ -35,8 +33,8 @@ CREATE TABLE IF NOT EXISTS cleaning_log (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     upload_id INTEGER NOT NULL REFERENCES uploads(id),
     row_number INTEGER,
-    reason TEXT NOT NULL,       -- Row flag drop reason.
-    raw_row TEXT                -- Serialized raw row data.
+    reason TEXT NOT NULL,
+    raw_row TEXT
 );
 
 CREATE TABLE IF NOT EXISTS predictions_demand (
@@ -52,7 +50,7 @@ CREATE TABLE IF NOT EXISTS predictions_payment_risk (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     upload_id INTEGER NOT NULL REFERENCES uploads(id),
     party_name TEXT NOT NULL,
-    risk_label TEXT NOT NULL,      -- Evaluated payment risk label.
+    risk_label TEXT NOT NULL,
     generated_at TEXT NOT NULL
 );
 """
@@ -60,9 +58,6 @@ CREATE TABLE IF NOT EXISTS predictions_payment_risk (
 
 @contextmanager
 def get_connection():
-    """
-    Context managed SQLite connection.
-    """
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON;")
@@ -77,6 +72,5 @@ def get_connection():
 
 
 def init_db():
-    """Initialize SQLite database tables."""
     with get_connection() as conn:
         conn.executescript(SCHEMA)

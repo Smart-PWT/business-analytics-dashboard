@@ -1,4 +1,4 @@
-"""Machine learning prediction orchestrator."""
+"""ml prediction orchestrator"""
 
 from datetime import datetime, timezone
 
@@ -18,7 +18,6 @@ def _load_transactions(upload_id: int) -> pd.DataFrame:
 
 
 def run_predictions(upload_id: int) -> dict:
-    """Run both prediction models."""
     df = _load_transactions(upload_id)
     now_iso = datetime.now(timezone.utc).isoformat()
 
@@ -26,7 +25,6 @@ def run_predictions(upload_id: int) -> dict:
     risk_results = predict_payment_risk(df)
 
     with get_connection() as conn:
-        # Clear previous predictions
         conn.execute("DELETE FROM predictions_demand WHERE upload_id = ?", (upload_id,))
         conn.execute("DELETE FROM predictions_payment_risk WHERE upload_id = ?", (upload_id,))
 
@@ -55,7 +53,6 @@ def run_predictions(upload_id: int) -> dict:
 
 
 def get_latest_predictions(upload_id: int) -> dict:
-    """Fetch most recent predictions."""
     with get_connection() as conn:
         demand_rows = conn.execute(
             "SELECT item_name, predicted_units, forecast_date FROM predictions_demand WHERE upload_id = ?",

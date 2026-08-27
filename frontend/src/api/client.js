@@ -3,9 +3,12 @@
 const API_BASE_URL = "http://127.0.0.1:8000";
 
 /** Uploads file, returns JSON. */
-export async function uploadFile(file) {
+export async function uploadFile(file, userId = null) {
   const formData = new FormData();
   formData.append("file", file);
+  if (userId) {
+    formData.append("user_id", userId);
+  }
 
   const response = await fetch(`${API_BASE_URL}/api/upload`, {
     method: "POST",
@@ -63,10 +66,25 @@ export async function rerunPredictions(uploadId) {
 }
 
 /** Lists all past uploads. */
-export async function listUploads() {
-  const response = await fetch(`${API_BASE_URL}/api/uploads`);
+export async function listUploads(userId = null) {
+  const url = userId 
+    ? `${API_BASE_URL}/api/uploads?user_id=${encodeURIComponent(userId)}`
+    : `${API_BASE_URL}/api/uploads`;
+  const response = await fetch(url);
   if (!response.ok) {
     throw new Error("Could not load upload history.");
+  }
+  return response.json();
+}
+
+/** Deletes a specific upload by ID. */
+export async function deleteUpload(uploadId) {
+  const response = await fetch(`${API_BASE_URL}/api/uploads/${uploadId}`, {
+    method: "DELETE",
+  });
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.detail || "Could not delete upload.");
   }
   return response.json();
 }

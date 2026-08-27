@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-
 import Navbar from "./components/Navbar.jsx"
 import Dashboard from "./pages/Dashboard.jsx";
 import Upload from "./pages/Upload.jsx";
@@ -10,7 +9,6 @@ import Login from "./pages/login.jsx";
 import Layout from "./layout.jsx";
 import NotFound from "./components/NotFound.jsx";
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -19,7 +17,6 @@ function App() {
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-
         {/* App pages — with Navbar */}
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
@@ -30,8 +27,6 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
-
   );
 }
-
 export default App;

@@ -29,6 +29,9 @@ function Export() {
                     setLoading(false);
                 })
                 .catch((err) => {
+                    // If the server says "not found" the uploadId is stale
+                    // (e.g. backend restarted). Clear it so the user is
+                    // prompted to re-upload rather than seeing a raw error.
                     if (
                         err.message?.toLowerCase().includes("not found") ||
                         err.message?.toLowerCase().includes("upload not found")
